@@ -6,10 +6,21 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">#E9E9E9</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/bg_splash</item>
     </style>
+
+    <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#FFFFFE</item>                                <!-- 배경 -->
+        <item name="android:textColorPrimary">#0BAF64</item>       <!-- 탭바 선택된 텍스트 -->
+        <item name="android:textColorSecondary">#6F6F6F</item>     <!-- 탭바 텍스트 -->
+        <item name="colorAccent">#0BAF64</item>                    <!-- 하단 움직이는 바 색-->
+    </style>
+
 
 </resources>
