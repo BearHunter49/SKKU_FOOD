@@ -1,0 +1,43 @@
+package com.example.skku_food.adapter
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.skku_food.R
+import com.example.skku_food.data.menu_data
+import kotlinx.android.synthetic.main.menu_item.view.*
+
+class menu_rcl_adt:RecyclerView.Adapter<menu_rcl_adt.MenuViewHolder>(){
+
+    private val items: MutableList<menu_data> = mutableListOf(menu_data(R.drawable.ic_menu_school, "학식"),
+        menu_data(R.drawable.ic_menu_rice, "한식"), menu_data(R.drawable.ic_menu_chine, "중국집"),
+        menu_data(R.drawable.ic_menu_cutlet, "돈까스"), menu_data(R.drawable.ic_menu_chicken, "치킨"),
+        menu_data(R.drawable.ic_menu_pizza, "피자"), menu_data(R.drawable.ic_menu_dduck, "분식"),
+        menu_data(R.drawable.ic_menu_burger, "햄버거"), menu_data(R.drawable.ic_menu_doshi, "도시락"),
+        menu_data(R.drawable.ic_menu_soup, "국밥"), menu_data(R.drawable.ic_menu_noodle, "면류"),
+        menu_data(R.drawable.ic_menu_sushi, "초밥"), menu_data(R.drawable.ic_menu_gogi, "고기"),
+        menu_data(R.drawable.ic_menu_restau, "레스토랑"), menu_data(R.drawable.ic_menu_curry, "카레"))
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MenuViewHolder(parent)
+
+    override fun getItemCount(): Int = items.size
+
+    override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
+        items[position].let { item ->
+            with(holder){
+                img.setImageResource(item.menu_img)
+                nm.text = item.menu_nm
+            }
+        }
+    }
+
+    inner class MenuViewHolder(parent: ViewGroup): RecyclerView.ViewHolder(LayoutInflater
+        .from(parent.context)
+            .inflate(R.layout.menu_item, parent, false)){
+
+        val img = itemView.menu_image
+        val nm = itemView.menu_name
+    }
+
+}

@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">#E9E9E9</item>
+        <item name="android:statusBarColor">#F19E6E</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">

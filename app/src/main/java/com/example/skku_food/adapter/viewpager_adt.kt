@@ -19,9 +19,7 @@ class viewpager_adt(fm: androidx.fragment.app.FragmentManager) : FragmentStatePa
         }
     }
 
-    override fun getCount(): Int {
-        return 3
-    }
+    override fun getCount(): Int = titleList.size
 
     override fun getPageTitle(position: Int): CharSequence? {
         return titleList[position]

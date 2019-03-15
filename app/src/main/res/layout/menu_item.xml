@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="@dimen/item_offset"
+              android:layout_height="100dp"
+>
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="80dp"
+               android:id="@+id/menu_image"
+               android:background="@drawable/menu_item_bg"
+   />
+
+    <TextView
+            android:id="@+id/menu_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Content"
+            android:textSize="15sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/menu_image"
+            android:layout_alignEnd="@+id/menu_image"
+            android:gravity="center_horizontal"
+    />
+
+</RelativeLayout>
