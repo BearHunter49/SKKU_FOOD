@@ -1,4 +1,4 @@
-package com.example.skku_food.main_fragment
+package com.example.skku_food.mainFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.skku_food.MainActivity
 import com.example.skku_food.R
 import com.example.skku_food.adapter.menu_rcl_adt
 import com.example.skku_food.adapter.menu_rcl_itemdecor

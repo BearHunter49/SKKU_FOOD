@@ -1,17 +1,18 @@
 package com.example.skku_food.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skku_food.R
 import com.example.skku_food.data.menu_data
+import com.example.skku_food.menuActivity.RestaurantActivity
 import kotlinx.android.synthetic.main.menu_item.view.*
 
 class menu_rcl_adt:RecyclerView.Adapter<menu_rcl_adt.MenuViewHolder>(){
 
     private val items: MutableList<menu_data> = mutableListOf(menu_data(R.drawable.ic_menu_school, "학식"),
-        menu_data(R.drawable.ic_menu_rice, "한식"), menu_data(R.drawable.ic_menu_chine, "중국집"),
+        menu_data(R.drawable.ic_menu_rice, "한식"), menu_data(R.drawable.ic_menu_chine, "중식"),
         menu_data(R.drawable.ic_menu_cutlet, "돈까스"), menu_data(R.drawable.ic_menu_chicken, "치킨"),
         menu_data(R.drawable.ic_menu_pizza, "피자"), menu_data(R.drawable.ic_menu_dduck, "분식"),
         menu_data(R.drawable.ic_menu_burger, "햄버거"), menu_data(R.drawable.ic_menu_doshi, "도시락"),
@@ -24,12 +25,22 @@ class menu_rcl_adt:RecyclerView.Adapter<menu_rcl_adt.MenuViewHolder>(){
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
+
         items[position].let { item ->
             with(holder){
                 img.setImageResource(item.menu_img)
                 nm.text = item.menu_nm
+                itemView.setOnClickListener{
+
+                    with(itemView.context) {
+                        val intent = Intent(this, RestaurantActivity::class.java)
+                        intent.putExtra("menu", item.menu_nm)
+                        this.startActivity(intent)
+                    }
+                }
             }
         }
+
     }
 
     inner class MenuViewHolder(parent: ViewGroup): RecyclerView.ViewHolder(LayoutInflater

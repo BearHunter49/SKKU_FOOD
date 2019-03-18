@@ -2,9 +2,9 @@ package com.example.skku_food.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.skku_food.main_fragment.fragment_1
-import com.example.skku_food.main_fragment.fragment_2
-import com.example.skku_food.main_fragment.fragment_3
+import com.example.skku_food.mainFragment.fragment_1
+import com.example.skku_food.mainFragment.fragment_2
+import com.example.skku_food.mainFragment.fragment_3
 
 class viewpager_adt(fm: androidx.fragment.app.FragmentManager) : FragmentStatePagerAdapter(fm){
 
