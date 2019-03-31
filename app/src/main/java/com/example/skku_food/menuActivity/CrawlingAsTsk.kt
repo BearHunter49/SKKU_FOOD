@@ -1,5 +1,6 @@
 package com.example.skku_food.menuActivity
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.AsyncTask
@@ -15,11 +16,12 @@ import java.lang.ref.WeakReference
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CrawlingAsTsk(menuView:TextView, context:Context):AsyncTask<String, Void, Unit>(){
+class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):AsyncTask<String, Void, Unit>(){
 
     private var resultStr: String = ""
     private val weakView: WeakReference<TextView> = WeakReference(menuView)
-    val dialog:ProgressDialog = ProgressDialog(context)
+    private val weakActivity: WeakReference<Activity> = WeakReference(activity)
+    private val dialog:ProgressDialog = ProgressDialog(context)
 
     // 로딩
     override fun onPreExecute() {
@@ -27,6 +29,11 @@ class CrawlingAsTsk(menuView:TextView, context:Context):AsyncTask<String, Void, 
         dialog.apply {
             setProgressStyle(ProgressDialog.STYLE_SPINNER)
             setMessage("로딩 중...")
+            setCanceledOnTouchOutside(false)
+            setOnCancelListener {
+                val act = weakActivity.get()
+                act?.finish()
+            }
             show()
         }
 
@@ -47,7 +54,6 @@ class CrawlingAsTsk(menuView:TextView, context:Context):AsyncTask<String, Void, 
         when(params[0]){
             //학식
             "학생회관(행단골)" -> {
-
                 for (fTime in fTimeList) {
                     hakURL =
                             "https://www.skku.edu/skku/campus/support/welfare_11_1.do?mode=info&srDt=$time&srCategory=$fTime&conspaceCd=20201104&srResId=3&srShowTime=D"
@@ -113,8 +119,8 @@ class CrawlingAsTsk(menuView:TextView, context:Context):AsyncTask<String, Void, 
             }
             // 긱식
             "기숙사식당(봉룡학사)" -> {
-                Log.d("중간", "긱식(봉룡학사)")
 
+                Thread.sleep(2000)
                 hakURL = "https://dorm.skku.edu/_custom/skku/_common/board/schedule_menu/food_menu_page.jsp?date=$time&board_no=61&lng=ko"
                 doc = Jsoup.connect(hakURL).get()
 
@@ -138,10 +144,12 @@ class CrawlingAsTsk(menuView:TextView, context:Context):AsyncTask<String, Void, 
     // UI 변경 (결과)
     override fun onPostExecute(result: Unit?) {
         val txtView = weakView.get()
-        if (txtView != null){
-            txtView.text = resultStr
-        }
+        txtView?.text = resultStr
         dialog.dismiss()
     }
 
+    // 취소 처리
+    override fun onCancelled() {
+        super.onCancelled()
+    }
 }
