@@ -126,7 +126,6 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
 
                 for (i in 1..3){
                     val menuStr = doc.select("#foodlist0$i > ul > li > p").text()
-                    Log.d("긱식메뉴Str", menuStr)
 
                     when(i){
                         1 -> resultStr += "조식\n"
