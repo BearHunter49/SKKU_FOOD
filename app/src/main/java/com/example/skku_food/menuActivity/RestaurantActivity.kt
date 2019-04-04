@@ -22,6 +22,7 @@ class RestaurantActivity : AppCompatActivity() {
 
     private lateinit var mAdView: AdView
     private var job: Job? = null
+    private lateinit var menuNM: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +35,7 @@ class RestaurantActivity : AppCompatActivity() {
         mAdView.loadAd(adRequest)
 
         //from Intent
-        val menuNM = intent.getStringExtra("menu")
+        menuNM = intent.getStringExtra("menu")
         text_menuNM.text = menuNM
 
         //학식 or 음식점
@@ -46,7 +47,7 @@ class RestaurantActivity : AppCompatActivity() {
                 )
 
                 res_recyclerview.apply {
-                    adapter = res_rcl_adt(items)
+                    adapter = res_rcl_adt(items, menuNM)
                     layoutManager = LinearLayoutManager(context)
                 }
             }
@@ -75,7 +76,7 @@ class RestaurantActivity : AppCompatActivity() {
 
             CoroutineScope(Dispatchers.Main).launch {
                 res_recyclerview.apply {
-                    adapter = res_rcl_adt(resList)
+                    adapter = res_rcl_adt(resList, menuNM)
                     layoutManager = LinearLayoutManager(context)
                 }
             }

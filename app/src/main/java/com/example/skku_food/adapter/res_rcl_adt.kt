@@ -9,7 +9,7 @@ import com.example.skku_food.data.res_data
 import com.example.skku_food.menuActivity.ResMenuActivity
 import kotlinx.android.synthetic.main.res_item.view.*
 
-class res_rcl_adt(private val items:List<res_data>):RecyclerView.Adapter<res_rcl_adt.ResViewHolder>(){
+class res_rcl_adt(private val items:List<res_data>, private val menu: String):RecyclerView.Adapter<res_rcl_adt.ResViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ResViewHolder(parent)
@@ -26,6 +26,7 @@ class res_rcl_adt(private val items:List<res_data>):RecyclerView.Adapter<res_rcl
                     with(itemView.context) {
                         val intent = Intent(this, ResMenuActivity::class.java)
                         intent.putExtra("name", item.name)
+                        intent.putExtra("menu", menu)
                         this.startActivity(intent)
                     }
                 }

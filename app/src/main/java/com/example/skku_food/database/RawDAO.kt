@@ -12,6 +12,6 @@ interface RawDAO{
     fun getJustNamePhone(query: SupportSQLiteQuery): List<res_data>
 
     @RawQuery
-    fun getFullResInfo(query: SupportSQLiteQuery): List<res_menu_data>
+    fun getFullResInfo(query: SupportSQLiteQuery): res_menu_data
 
 }

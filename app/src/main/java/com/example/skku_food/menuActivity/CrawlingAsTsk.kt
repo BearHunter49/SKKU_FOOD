@@ -102,7 +102,6 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
                     val priceStr=
                         doc.select("div.corner_info > ul > li:nth-child(2) > span").text()
 
-                    val menuList = menuStr.split(" ")
                     val priceList = priceStr.split("가격 : ")
 
                     when(fTime){
@@ -111,7 +110,7 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
                         "D" -> resultStr += "석식\n"
                     }
 
-                    menuList.forEachIndexed { index, s ->
+                    menuStr.split(" ").forEachIndexed { index, s ->
                         resultStr += String.format("%s=%s ", s, priceList[index + 1])
                     }
                     resultStr += "\n\n"
@@ -126,13 +125,20 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
 
                 for (i in 1..3){
                     val menuStr = doc.select("#foodlist0$i > ul > li > p").text()
+                    val titleStr = doc.select("#foodlist0$i > ul > li > span").text()
+                    val menuList = menuStr.split("[0-9]{2}:[0-9]{2}~[0-9]{2}:[0-9]{2},".toRegex())
 
                     when(i){
                         1 -> resultStr += "조식\n"
                         2 -> resultStr += "중식\n"
                         3 -> resultStr += "석식\n"
                     }
-                    resultStr += menuStr + "\n\n"
+
+                    titleStr.split(" ").forEachIndexed { index, s ->
+                        resultStr += String.format("<%s>\n%s\n", s, menuList[index + 1].trim())
+                    }
+
+                    resultStr += "\n"
                 }
 
             }
