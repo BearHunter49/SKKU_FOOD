@@ -3,6 +3,7 @@
           package="com.example.skku_food">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
             android:allowBackup="true"
@@ -12,6 +13,12 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="e60e226d50916f5e628fd6f749b46a98"/>
+
+        <activity android:name=".menuActivity.MapActivity">
+        </activity>
         <activity android:name=".menuActivity.ResMenuActivity">
         </activity>
         <activity android:name=".menuActivity.RestaurantActivity">

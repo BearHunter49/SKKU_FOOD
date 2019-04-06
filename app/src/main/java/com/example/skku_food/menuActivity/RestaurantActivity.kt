@@ -73,7 +73,7 @@ class RestaurantActivity : AppCompatActivity() {
 
         job = CoroutineScope(Dispatchers.IO).launch {
             val resList = db!!.rawDAO().getJustNamePhone(query)
-
+            // UI Thread
             CoroutineScope(Dispatchers.Main).launch {
                 res_recyclerview.apply {
                     adapter = res_rcl_adt(resList, menuNM)

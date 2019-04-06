@@ -7,7 +7,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(entities = [KoreanEntity::class, ChineseEntity::class, CutletEntity::class, ChickenEntity::class,
     PizzaEntity::class, InstantEntity::class, HamburgerEntity::class, LunchboxEntity::class, SoupEntity::class,
-    NoodleEntity::class, SushiEntity::class, MeatEntity::class, RestaurantEntity::class, CurryEntity::class], version = 2)
+    NoodleEntity::class, SushiEntity::class, MeatEntity::class, RestaurantEntity::class, CurryEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase(){
 
     abstract fun rawDAO(): RawDAO
