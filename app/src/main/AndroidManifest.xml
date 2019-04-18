@@ -12,10 +12,14 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".foodcupActivity.MenuFinishActivity">
+        </activity>
+        <activity android:name=".foodcupActivity.TournamentActivity">
+        </activity>
 
         <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="e60e226d50916f5e628fd6f749b46a98"/>
+                android:name="com.kakao.sdk.AppKey"
+                android:value="e60e226d50916f5e628fd6f749b46a98"/>
 
         <activity android:name=".menuActivity.MapActivity">
         </activity>
