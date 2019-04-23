@@ -2,12 +2,11 @@ package com.example.skku_food.menuActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.skku_food.R
 import com.example.skku_food.adapter.res_rcl_adt
-import com.example.skku_food.data.menuKor_Eng
+import com.example.skku_food.data.menu_KorTOEng
 import com.example.skku_food.data.res_data
 import com.example.skku_food.database.DatabaseCopier
 import com.google.android.gms.ads.AdRequest
@@ -15,7 +14,6 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_restaurant.*
 import kotlinx.coroutines.*
-import kotlin.concurrent.thread
 
 
 class RestaurantActivity : AppCompatActivity() {
@@ -52,12 +50,10 @@ class RestaurantActivity : AppCompatActivity() {
                 }
             }
             else -> {
-                dbExecute(menuKor_Eng.mHash[menuNM])
+                dbExecute(menu_KorTOEng.mHash[menuNM])
             }
 
-
         }
-
     }
 
     // 코루틴 취소
@@ -81,7 +77,6 @@ class RestaurantActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
 

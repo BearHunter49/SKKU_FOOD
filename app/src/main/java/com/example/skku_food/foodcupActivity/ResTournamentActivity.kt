@@ -1,53 +1,85 @@
 package com.example.skku_food.foodcupActivity
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.skku_food.R
-import com.example.skku_food.data.menu_foodcupData
-import com.example.skku_food.data.menu_imgURL
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_tournament.*
+import com.example.skku_food.data.menu_KorTOEng
+import com.example.skku_food.data.res_data
+import com.example.skku_food.database.DatabaseCopier
+import kotlinx.android.synthetic.main.activity_res_tournament.*
+import kotlinx.coroutines.*
 
-class TournamentActivity : AppCompatActivity() {
+class ResTournamentActivity : AppCompatActivity() {
 
-    private lateinit var model: MenuViewModel
-    private var startList = menu_imgURL.menuInfo.toMutableList()
-    private var endList:MutableList<menu_foodcupData> = mutableListOf()
-    private var totalCount = startList.size / 2
+    private lateinit var model: ResViewModel
+    private lateinit var job: Job
+    private lateinit var startList: MutableList<res_data>
+    private var endList:MutableList<res_data> = mutableListOf()
+    private var totalCount = 0
     private var count = 1
     private var round = 1
+    private lateinit var dialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tournament)
+        setContentView(R.layout.activity_res_tournament)
 
+        dialog = ProgressDialog(this)
+        val menu = intent.getStringExtra("menu")
+        val menuEngName = menu_KorTOEng.mHash[menu]
 
-        //ViewModel Observer 달아주기
-        model = ViewModelProviders.of(this).get(MenuViewModel::class.java)
-        val menuObserver = Observer<List<menu_foodcupData>>{ newList ->
-            Picasso.get().load(newList[0].url).into(imageView1)
-            Picasso.get().load(newList[1].url).into(imageView2)
-            text_menu1.text = newList[0].name
-            text_menu2.text = newList[1].name
+        // 다이얼로그 띄우기
+        dialog.apply {
+            setProgressStyle(ProgressDialog.STYLE_SPINNER)
+            setMessage("DB 읽는 중...")
+            setCanceledOnTouchOutside(false)
+            setOnCancelListener {
+                finish()
+            }
+            show()
         }
-        model.currentMenu.observe(this, menuObserver)
 
+        // ViewModel 달기
+        model = ViewModelProviders.of(this).get(ResViewModel::class.java)
+        val resObserver = Observer<List<res_data>>{ newList ->
+            text_res1.text = newList[0].name
+            text_res2.text = newList[1].name
+        }
+        model.currentRes.observe(this, resObserver)
+
+
+        // DB에서 res_data 뽑아오기
+        val query = SimpleSQLiteQuery("SELECT name, phone FROM $menuEngName")
+        val db = DatabaseCopier.getAppDataBase(context = applicationContext)
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val resList = db!!.rawDAO().getJustNamePhone(query)
+            startList = resList.toMutableList()
+        }
+
+        runBlocking {
+            job.join()
+            dialog.dismiss()
+        }
 
         // Initial state
+        totalCount = startList.size / 2
         val firstItem = startList.random()
         startList.remove(firstItem)
         val secondItem = startList.random()
         startList.remove(secondItem)
-        model.currentMenu.value = listOf(firstItem, secondItem)
+        model.currentRes.value = listOf(firstItem, secondItem)
         text_round.text = String.format("$round 라운드 $count / $totalCount")
 
 
+
         // --------------------Button Click----------------------------------
-        imageView1.setOnClickListener {
-            endList.add(model.currentMenu.value!![0])
+        text_res1.setOnClickListener {
+            endList.add(model.currentRes.value!![0])
             count++
 
             // 1개 남았으면 -> 부전승
@@ -69,9 +101,9 @@ class TournamentActivity : AppCompatActivity() {
 
                 // 경기가 끝인 경우 -> 끝내기
                 else{
-                    val intent = Intent(this, MenuFinishActivity::class.java)
-                    intent.putExtra("menu", endList[0].name)
-                    intent.putExtra("url", endList[0].url)
+                    val intent = Intent(this, ResFinishActivity::class.java)
+                    intent.putExtra("menu", menu)
+                    intent.putExtra("resName", endList[0].name)
                     startActivity(intent)
                     finish()
                 }
@@ -83,14 +115,14 @@ class TournamentActivity : AppCompatActivity() {
                 startList.remove(first)
                 val second = startList.random()
                 startList.remove(second)
-                model.currentMenu.value = listOf(first, second)
+                model.currentRes.value = listOf(first, second)
                 text_round.text = String.format("$round 라운드 $count / $totalCount")
             }
 
         }
 
-        imageView2.setOnClickListener {
-            endList.add(model.currentMenu.value!![1])
+        text_res2.setOnClickListener {
+            endList.add(model.currentRes.value!![1])
             count++
 
             // 1개 남았으면 -> 부전승
@@ -112,9 +144,9 @@ class TournamentActivity : AppCompatActivity() {
 
                 // 경기가 끝인 경우 -> 끝내기
                 else{
-                    val intent = Intent(this, MenuFinishActivity::class.java)
-                    intent.putExtra("menu", endList[0].name)
-                    intent.putExtra("url", endList[0].url)
+                    val intent = Intent(this, ResFinishActivity::class.java)
+                    intent.putExtra("menu", menu)
+                    intent.putExtra("resName", endList[0].name)
                     startActivity(intent)
                     finish()
                 }
@@ -126,10 +158,16 @@ class TournamentActivity : AppCompatActivity() {
                 startList.remove(first)
                 val second = startList.random()
                 startList.remove(second)
-                model.currentMenu.value = listOf(first, second)
+                model.currentRes.value = listOf(first, second)
                 text_round.text = String.format("$round 라운드 $count / $totalCount")
             }
         }
+
+    }
+
+    override fun onDestroy() {
+        job.cancel()
+        super.onDestroy()
     }
 
 

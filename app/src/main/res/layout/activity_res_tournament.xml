@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".foodcupActivity.ResTournamentActivity">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="식당 선택"
+              android:textSize="40sp"
+              android:textColor="@android:color/black"
+              android:textStyle="bold" app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              android:layout_marginTop="20dp" app:layout_constraintTop_toTopOf="parent" android:id="@+id/textView"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/text_round"
+              android:textColor="@android:color/black"
+              android:textSize="20sp"
+              app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+              android:layout_marginTop="10dp"
+              app:layout_constraintTop_toBottomOf="@+id/textView"/>
+
+    <TextView android:layout_width="0dp" android:layout_height="0dp"
+              app:layout_constraintStart_toStartOf="parent"
+              android:id="@+id/text_res1"
+              android:layout_marginTop="10dp"
+              android:textSize="50sp"
+              android:textStyle="bold"
+              android:textColor="@android:color/holo_orange_dark"
+              app:layout_constraintTop_toBottomOf="@+id/text_round"
+              app:layout_constraintEnd_toEndOf="parent"
+              android:gravity="center"
+              android:layout_marginEnd="20dp"
+              android:layout_marginStart="20dp"
+              app:layout_constraintBottom_toTopOf="@+id/text_res2"/>
+
+    <TextView android:layout_width="0dp" android:layout_height="0dp"
+               android:id="@+id/text_res2"
+              android:gravity="center"
+              android:textSize="50sp"
+              android:textStyle="bold"
+              android:textColor="@android:color/holo_orange_dark"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/text_res1"
+               android:layout_marginBottom="130dp"
+               android:layout_marginStart="20dp" android:layout_marginEnd="20dp"/>
+
+
+    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+               android:src="@drawable/vs_image"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="@+id/text_res2"
+               app:layout_constraintBottom_toBottomOf="@id/text_res2"
+               app:layout_constraintTop_toTopOf="@id/text_res1"
+               android:id="@+id/image_vs"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

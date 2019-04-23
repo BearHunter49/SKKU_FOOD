@@ -5,15 +5,12 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.skku_food.R
-import com.example.skku_food.adapter.res_rcl_adt
-import com.example.skku_food.data.menuKor_Eng
+import com.example.skku_food.data.menu_KorTOEng
 import com.example.skku_food.data.res_menu_data
 import com.example.skku_food.database.DatabaseCopier
 import kotlinx.android.synthetic.main.activity_res_menu.*
-import kotlinx.android.synthetic.main.activity_restaurant.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -44,7 +41,7 @@ class ResMenuActivity : AppCompatActivity() {
             }
             // 음식점
             else -> {
-                dbExecute(menuKor_Eng.mHash[menuNM], resNM)
+                dbExecute(menu_KorTOEng.mHash[menuNM], resNM)
             }
 
         }
@@ -61,10 +58,11 @@ class ResMenuActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        // AsyncTask 실행을 종료시켜 줌
+        // AsyncTask 종료
         if(mAsTsk?.status == AsyncTask.Status.RUNNING)
             mAsTsk?.cancel(true)
-
+        // 코루틴 종료
+        job?.cancel()
         super.onDestroy()
     }
 

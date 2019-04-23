@@ -5,23 +5,16 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".foodcupActivity.MenuFinishActivity">
+        tools:context=".foodcupActivity.ResFinishActivity">
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:textSize="40sp"
               android:textColor="@android:color/black"
               android:textStyle="bold"
               android:id="@+id/textView"
-              android:text="메뉴 선택 결과" app:layout_constraintEnd_toEndOf="parent"
+              android:text="최종 결과" app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
               android:layout_marginTop="20dp" app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageView android:layout_width="0dp" android:layout_height="0dp"
-               app:layout_constraintTop_toBottomOf="@+id/textView"
-               app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-               app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-               android:layout_marginTop="30dp" android:id="@+id/imageView" android:layout_marginBottom="8dp"
-               app:layout_constraintBottom_toTopOf="@+id/text_menuName"/>
 
     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
               android:textSize="20sp"
@@ -30,12 +23,14 @@
               app:layout_constraintStart_toStartOf="parent"
               android:gravity="center"
               android:layout_marginBottom="320dp" app:layout_constraintBottom_toBottomOf="parent"
-              android:id="@+id/text_menuName" android:layout_marginStart="30dp" android:layout_marginEnd="30dp"/>
+              android:id="@+id/text_result" android:layout_marginTop="8dp"
+              app:layout_constraintTop_toBottomOf="@+id/textView" android:layout_marginStart="30dp"
+              android:layout_marginEnd="30dp"/>
 
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="식당도 고르기"
-            android:id="@+id/btn_goResCup"
-            app:layout_constraintTop_toBottomOf="@+id/text_menuName"
+            android:text="메뉴 보러 가기"
+            android:id="@+id/btn_goResMenu"
+            app:layout_constraintTop_toBottomOf="@+id/text_result"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="50dp"/>

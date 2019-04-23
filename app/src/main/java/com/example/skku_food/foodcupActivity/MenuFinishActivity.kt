@@ -1,5 +1,6 @@
 package com.example.skku_food.foodcupActivity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.skku_food.R
@@ -18,6 +19,12 @@ class MenuFinishActivity : AppCompatActivity() {
         text_menuName.text = String.format("당신의 선택은 '$menu'입니다! ")
         Picasso.get().load(url).into(imageView)
 
+        btn_goResCup.setOnClickListener {
+            val intent = Intent(this, ResTournamentActivity::class.java)
+            intent.putExtra("menu", menu)
+            startActivity(intent)
+            finish()
+        }
 
     }
 }
