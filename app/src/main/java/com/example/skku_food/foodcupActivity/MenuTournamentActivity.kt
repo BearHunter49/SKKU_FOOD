@@ -1,14 +1,17 @@
 package com.example.skku_food.foodcupActivity
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.skku_food.R
 import com.example.skku_food.data.MenuFoodCupData
 import com.example.skku_food.data.MenuFoodCupURL
 import kotlinx.android.synthetic.main.activity_tournament.*
+import kotlin.random.Random
 
 class MenuTournamentActivity : AppCompatActivity() {
 
@@ -50,6 +53,10 @@ class MenuTournamentActivity : AppCompatActivity() {
 
         imageView2.setOnClickListener {
             tournament(1)
+        }
+
+        btn_random.setOnClickListener {
+            tournament(Random.nextInt(2))
         }
     }
 
@@ -93,6 +100,16 @@ class MenuTournamentActivity : AppCompatActivity() {
             startList.remove(second)
             model.currentMenu.value = listOf(first, second)
             text_round.text = String.format("$round 라운드 $count / $totalCount")
+        }
+    }
+
+    override fun onBackPressed() {
+        AlertDialog.Builder(this).apply {
+            title = "알림"
+            setMessage("푸드컵을 종료하시겠습니까?")
+            setNegativeButton("취소", null)
+            setPositiveButton("종료") {_, _ -> finish() }
+            show()
         }
     }
 

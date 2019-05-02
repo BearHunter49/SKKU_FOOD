@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-class MyPermission(){
+class MyPermission{
 
     companion object {
         const val PERMISSION_CODE = 200

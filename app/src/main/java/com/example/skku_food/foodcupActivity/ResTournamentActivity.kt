@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.sqlite.db.SimpleSQLiteQuery
@@ -13,6 +14,7 @@ import com.example.skku_food.data.ResSimpleData
 import com.example.skku_food.database.DatabaseCopier
 import kotlinx.android.synthetic.main.activity_res_tournament.*
 import kotlinx.coroutines.*
+import kotlin.random.Random
 
 class ResTournamentActivity : AppCompatActivity() {
 
@@ -87,6 +89,10 @@ class ResTournamentActivity : AppCompatActivity() {
             tournament(1, menu)
         }
 
+        btn_random.setOnClickListener {
+            tournament(Random.nextInt(2), menu)
+        }
+
     }
 
     override fun onDestroy() {
@@ -134,6 +140,16 @@ class ResTournamentActivity : AppCompatActivity() {
             startList.remove(second)
             model.currentRes.value = listOf(first, second)
             text_round.text = String.format("$round 라운드 $count / $totalCount")
+        }
+    }
+
+    override fun onBackPressed() {
+        AlertDialog.Builder(this).apply {
+            title = "알림"
+            setMessage("푸드컵을 종료하시겠습니까?")
+            setNegativeButton("취소", null)
+            setPositiveButton("종료") {_, _ -> finish() }
+            show()
         }
     }
 

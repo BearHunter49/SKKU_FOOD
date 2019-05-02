@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
 import com.example.skku_food.adapter.ViewpagerAdt
 import com.example.skku_food.database.DatabaseCopier
+import com.example.skku_food.myMethod.MyBackPressed
 import com.example.skku_food.myMethod.MyPermission
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -70,6 +71,11 @@ class MainActivity : AppCompatActivity() {
 
         // Permission
         MyPermission.myRequestPermission(MyPermission.myPermissionCheck(this), this)
+    }
+
+    // Back Key
+    override fun onBackPressed() {
+        MyBackPressed.onBackPressed(this)
     }
 
     // Permission Result
