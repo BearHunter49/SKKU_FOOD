@@ -23,7 +23,7 @@
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".foodcupActivity.TournamentActivity"
+                android:name=".foodcupActivity.MenuTournamentActivity"
                 android:screenOrientation="portrait">
         </activity>
         <activity

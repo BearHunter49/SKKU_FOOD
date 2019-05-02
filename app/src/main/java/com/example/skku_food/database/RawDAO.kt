@@ -3,15 +3,15 @@ package com.example.skku_food.database
 import androidx.room.Dao
 import androidx.room.RawQuery
 import androidx.sqlite.db.SupportSQLiteQuery
-import com.example.skku_food.data.res_data
-import com.example.skku_food.data.res_menu_data
+import com.example.skku_food.data.ResSimpleData
+import com.example.skku_food.data.ResFullData
 
 @Dao
 interface RawDAO{
     @RawQuery
-    fun getJustNamePhone(query: SupportSQLiteQuery): List<res_data>
+    fun getJustNamePhone(query: SupportSQLiteQuery): List<ResSimpleData>
 
     @RawQuery
-    fun getFullResInfo(query: SupportSQLiteQuery): res_menu_data
+    fun getFullResInfo(query: SupportSQLiteQuery): ResFullData
 
 }

@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 
-class menu_rcl_itemdecor(private val mSpanCount: Int, private val mItemSize: Int) : RecyclerView.ItemDecoration() {
+class MenuRclItemDecor(private val mSpanCount: Int, private val mItemSize: Int) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView,
         state: RecyclerView.State) {

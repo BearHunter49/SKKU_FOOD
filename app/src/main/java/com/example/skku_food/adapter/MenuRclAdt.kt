@@ -5,20 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skku_food.R
-import com.example.skku_food.data.menu_catagoryData
+import com.example.skku_food.data.MenuCategoryURL
 import com.example.skku_food.menuActivity.RestaurantActivity
 import kotlinx.android.synthetic.main.menu_item.view.*
 
-class menu_rcl_adt:RecyclerView.Adapter<menu_rcl_adt.MenuViewHolder>(){
+class MenuRclAdt:RecyclerView.Adapter<MenuRclAdt.MenuViewHolder>(){
 
-    private val items: MutableList<menu_catagoryData> = mutableListOf(menu_catagoryData(R.drawable.ic_menu_school, "학식"),
-        menu_catagoryData(R.drawable.ic_menu_rice, "한식"), menu_catagoryData(R.drawable.ic_menu_chine, "중식"),
-        menu_catagoryData(R.drawable.ic_menu_cutlet, "돈까스"), menu_catagoryData(R.drawable.ic_menu_chicken, "치킨"),
-        menu_catagoryData(R.drawable.ic_menu_pizza, "피자"), menu_catagoryData(R.drawable.ic_menu_dduck, "분식"),
-        menu_catagoryData(R.drawable.ic_menu_burger, "햄버거"), menu_catagoryData(R.drawable.ic_menu_doshi, "도시락"),
-        menu_catagoryData(R.drawable.ic_menu_soup, "국밥"), menu_catagoryData(R.drawable.ic_menu_noodle, "면류"),
-        menu_catagoryData(R.drawable.ic_menu_sushi, "초밥"), menu_catagoryData(R.drawable.ic_menu_gogi, "고기"),
-        menu_catagoryData(R.drawable.ic_menu_restau, "레스토랑"), menu_catagoryData(R.drawable.ic_menu_curry, "카레"))
+    private val items = MenuCategoryURL.items
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MenuViewHolder(parent)
 

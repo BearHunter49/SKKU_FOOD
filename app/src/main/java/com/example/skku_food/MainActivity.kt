@@ -1,26 +1,22 @@
 package com.example.skku_food
 
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
-import android.util.Log
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
-import com.example.skku_food.adapter.viewpager_adt
+import com.example.skku_food.adapter.ViewpagerAdt
 import com.example.skku_food.database.DatabaseCopier
 import com.example.skku_food.myMethod.MyPermission
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
-import java.security.MessageDigest
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
-    private val VPadapter by lazy { viewpager_adt(supportFragmentManager) }
+    private val VPadapter by lazy { ViewpagerAdt(supportFragmentManager) }
     lateinit var mAdView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {

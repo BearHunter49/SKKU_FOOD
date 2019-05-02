@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.skku_food.R
-import com.example.skku_food.data.menu_KorTOEng
-import com.example.skku_food.data.res_menu_data
+import com.example.skku_food.data.MenuKorTOEng
+import com.example.skku_food.data.ResFullData
 import com.example.skku_food.database.DatabaseCopier
 import kotlinx.android.synthetic.main.activity_res_menu.*
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +20,7 @@ class ResMenuActivity : AppCompatActivity() {
 
     private var mAsTsk: CrawlingAsTsk? = null
     private var job: Job? = null
-    private var resInfo: res_menu_data? = null
+    private var resInfo: ResFullData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class ResMenuActivity : AppCompatActivity() {
             }
             // 음식점
             else -> {
-                dbExecute(menu_KorTOEng.mHash[menuNM], resNM)
+                dbExecute(MenuKorTOEng.mHash[menuNM], resNM)
             }
 
         }

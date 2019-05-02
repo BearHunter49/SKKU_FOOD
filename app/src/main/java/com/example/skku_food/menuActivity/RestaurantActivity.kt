@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.skku_food.R
-import com.example.skku_food.adapter.res_rcl_adt
-import com.example.skku_food.data.menu_KorTOEng
-import com.example.skku_food.data.res_data
+import com.example.skku_food.adapter.ResRclAdt
+import com.example.skku_food.data.MenuKorTOEng
+import com.example.skku_food.data.ResSimpleData
 import com.example.skku_food.database.DatabaseCopier
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -39,18 +39,18 @@ class RestaurantActivity : AppCompatActivity() {
         //학식 or 음식점
         when (menuNM) {
             "학식" -> {
-                val items = listOf<res_data>(
-                    res_data("학생회관(행단골)", "031-294-8148"),
-                    res_data("공대식당(해오름)", "031-290-5442"), res_data("기숙사식당(봉룡학사)", "-")
+                val items = listOf<ResSimpleData>(
+                    ResSimpleData("학생회관(행단골)", "031-294-8148"),
+                    ResSimpleData("공대식당(해오름)", "031-290-5442"), ResSimpleData("기숙사식당(봉룡학사)", "-")
                 )
 
                 res_recyclerview.apply {
-                    adapter = res_rcl_adt(items, menuNM)
+                    adapter = ResRclAdt(items, menuNM)
                     layoutManager = LinearLayoutManager(context)
                 }
             }
             else -> {
-                dbExecute(menu_KorTOEng.mHash[menuNM])
+                dbExecute(MenuKorTOEng.mHash[menuNM])
             }
 
         }
@@ -72,7 +72,7 @@ class RestaurantActivity : AppCompatActivity() {
             // UI Thread
             CoroutineScope(Dispatchers.Main).launch {
                 res_recyclerview.apply {
-                    adapter = res_rcl_adt(resList, menuNM)
+                    adapter = ResRclAdt(resList, menuNM)
                     layoutManager = LinearLayoutManager(context)
                 }
             }
