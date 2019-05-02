@@ -153,8 +153,4 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
         dialog.dismiss()
     }
 
-    // 취소 처리
-    override fun onCancelled() {
-        super.onCancelled()
-    }
 }

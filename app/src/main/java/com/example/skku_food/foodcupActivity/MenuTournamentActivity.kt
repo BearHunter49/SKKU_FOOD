@@ -1,9 +1,11 @@
 package com.example.skku_food.foodcupActivity
 
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,6 +13,7 @@ import com.example.skku_food.R
 import com.example.skku_food.data.MenuFoodCupData
 import com.example.skku_food.data.MenuFoodCupURL
 import kotlinx.android.synthetic.main.activity_tournament.*
+import kotlinx.coroutines.*
 import kotlin.random.Random
 
 class MenuTournamentActivity : AppCompatActivity() {
@@ -21,6 +24,7 @@ class MenuTournamentActivity : AppCompatActivity() {
     private var totalCount = startList.size / 2
     private var count = 1
     private var round = 1
+    private var _position = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,23 +49,58 @@ class MenuTournamentActivity : AppCompatActivity() {
         model.currentMenu.value = listOf(firstItem, secondItem)
         text_round.text = String.format("$round 라운드 $count / $totalCount")
 
+        // Anim
+        val myAnim = AnimationUtils.loadAnimation(this, R.anim.tournament_select)
+        myAnim.setAnimationListener(object : Animation.AnimationListener{
+            override fun onAnimationRepeat(animation: Animation?) {
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                when(_position){
+                    0  -> tournament(0)
+                    1  -> tournament(1)
+                }
+                image_vs.bringToFront()
+            }
+
+            override fun onAnimationStart(animation: Animation?) {
+            }
+
+        })
+
 
         // --------------------Button Click----------------------------------
         imageView1.setOnClickListener {
-            tournament(0)
+            _position = 0
+            it.bringToFront()
+            it.startAnimation(myAnim)
         }
 
         imageView2.setOnClickListener {
-            tournament(1)
+            _position = 1
+            it.bringToFront()
+            it.startAnimation(myAnim)
         }
 
         btn_random.setOnClickListener {
-            tournament(Random.nextInt(2))
+            _position = Random.nextInt(2)
+            when(_position){
+                0 -> imageView1.apply {
+                    bringToFront()
+                    startAnimation(myAnim)
+                }
+                1 -> imageView2.apply {
+                    bringToFront()
+                    startAnimation(myAnim)
+                }
+            }
         }
+
+
     }
 
 
-    fun tournament(position:Int){
+    private fun tournament(position:Int){
         endList.add(model.currentMenu.value!![position])
         count++
 
@@ -112,6 +151,8 @@ class MenuTournamentActivity : AppCompatActivity() {
             show()
         }
     }
+
+
 
 
 }

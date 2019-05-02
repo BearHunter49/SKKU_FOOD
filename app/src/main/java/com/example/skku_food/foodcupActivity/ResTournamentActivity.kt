@@ -4,6 +4,8 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -25,6 +27,8 @@ class ResTournamentActivity : AppCompatActivity() {
     private var totalCount = 0
     private var count = 1
     private var round = 1
+    private var _position = 0
+    private lateinit var menu: String
     private lateinit var dialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +36,7 @@ class ResTournamentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_res_tournament)
 
         dialog = ProgressDialog(this)
-        val menu = intent.getStringExtra("menu")
+        menu = intent.getStringExtra("menu")
         val menuEngName = MenuKorTOEng.mHash[menu]
 
         // 다이얼로그 띄우기
@@ -77,20 +81,52 @@ class ResTournamentActivity : AppCompatActivity() {
         model.currentRes.value = listOf(firstItem, secondItem)
         text_round.text = String.format("$round 라운드 $count / $totalCount")
 
+        // Anim
+        val myAnim = AnimationUtils.loadAnimation(this, R.anim.tournament_select)
+        myAnim.setAnimationListener(object : Animation.AnimationListener{
+            override fun onAnimationRepeat(animation: Animation?) {
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                when(_position){
+                    0  -> tournament(0)
+                    1  -> tournament(1)
+                }
+                image_vs.bringToFront()
+            }
+
+            override fun onAnimationStart(animation: Animation?) {
+            }
+
+        })
+
 
 
         // --------------------Button Click----------------------------------
         text_res1.setOnClickListener {
-            tournament(0, menu)
-
+            _position = 0
+            it.bringToFront()
+            it.startAnimation(myAnim)
         }
 
         text_res2.setOnClickListener {
-            tournament(1, menu)
+            _position = 1
+            it.bringToFront()
+            it.startAnimation(myAnim)
         }
 
         btn_random.setOnClickListener {
-            tournament(Random.nextInt(2), menu)
+            _position = Random.nextInt(2)
+            when(_position){
+                0 -> text_res1.apply {
+                    bringToFront()
+                    startAnimation(myAnim)
+                }
+                1 -> text_res2.apply {
+                    bringToFront()
+                    startAnimation(myAnim)
+                }
+            }
         }
 
     }
@@ -101,7 +137,7 @@ class ResTournamentActivity : AppCompatActivity() {
     }
 
 
-    fun tournament(position:Int, _menu:String){
+    fun tournament(position:Int){
         endList.add(model.currentRes.value!![position])
         count++
 
@@ -125,7 +161,7 @@ class ResTournamentActivity : AppCompatActivity() {
             // 경기가 끝인 경우 -> 끝내기
             else{
                 val intent = Intent(this, ResFinishActivity::class.java)
-                intent.putExtra("menu", _menu)
+                intent.putExtra("menu", menu)
                 intent.putExtra("resName", endList[0].name)
                 startActivity(intent)
                 finish()
