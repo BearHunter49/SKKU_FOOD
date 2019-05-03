@@ -6,14 +6,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
 import com.example.skku_food.adapter.ViewpagerAdt
-import com.example.skku_food.database.DatabaseCopier
 import com.example.skku_food.myMethod.MyBackPressed
 import com.example.skku_food.myMethod.MyPermission
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,10 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Manage Database
-        thread {
-            DatabaseCopier.copyAttachedDatabase(context = applicationContext)
-        }
 
         //AdMob
         MobileAds.initialize(this, getString(R.string.admob_app_id))
@@ -47,12 +41,12 @@ class MainActivity : AppCompatActivity() {
                 override fun onPageSelected(position: Int) {
                     tablayout.apply {
                         getTabAt(0)!!.setIcon(R.drawable.ic_menu_gray)
-                        getTabAt(1)!!.setIcon(R.drawable.ic_dining_gray)
+                        getTabAt(1)!!.setIcon(R.drawable.ic_email_gray)
                         getTabAt(2)!!.setIcon(R.drawable.ic_trophy_gray)
 
                         when(position){
                             0   ->  getTabAt(0)!!.setIcon(R.drawable.ic_menu_green)
-                            1   ->  getTabAt(1)!!.setIcon(R.drawable.ic_dining_green)
+                            1   ->  getTabAt(1)!!.setIcon(R.drawable.ic_email_green)
                             2   ->  getTabAt(2)!!.setIcon(R.drawable.ic_trophy_green)
                         }
                     }
@@ -65,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         tablayout.apply {
             setupWithViewPager(viewpager)
             getTabAt(0)!!.setIcon(R.drawable.ic_menu_green)
-            getTabAt(1)!!.setIcon(R.drawable.ic_dining_gray)
+            getTabAt(1)!!.setIcon(R.drawable.ic_email_gray)
             getTabAt(2)!!.setIcon(R.drawable.ic_trophy_gray)
         }
 

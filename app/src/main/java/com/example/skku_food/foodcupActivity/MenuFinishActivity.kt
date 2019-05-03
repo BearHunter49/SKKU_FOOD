@@ -14,10 +14,10 @@ class MenuFinishActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu_finish)
 
         val menu = intent.getStringExtra("menu")
-        val url = intent.getStringExtra("url")
+        val url = intent.getIntExtra("url", 0)
 
         text_menuName.text = String.format("당신의 선택은 '$menu'입니다! ")
-        Picasso.get().load(url).into(imageView)
+        imageView.setImageResource(url)
 
         btn_goResCup.setOnClickListener {
             val intent = Intent(this, ResTournamentActivity::class.java)

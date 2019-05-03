@@ -8,14 +8,15 @@
     <ImageView android:layout_width="match_parent"
                android:layout_height="80dp"
                android:id="@+id/menu_image"
-               android:background="@drawable/menu_item_bg"
+
    />
+    <!--android:background="@drawable/menu_item_bg"-->
 
     <TextView
             android:id="@+id/menu_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Content"
+            android:text=""
             android:textSize="15sp"
             android:textColor="@android:color/black"
             android:textStyle="bold"

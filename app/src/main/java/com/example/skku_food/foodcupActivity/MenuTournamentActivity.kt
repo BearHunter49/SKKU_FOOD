@@ -61,9 +61,15 @@ class MenuTournamentActivity : AppCompatActivity() {
                     1  -> tournament(1)
                 }
                 image_vs.bringToFront()
+                imageView1.isEnabled = true
+                imageView2.isEnabled = true
+                btn_random.isEnabled = true
             }
 
             override fun onAnimationStart(animation: Animation?) {
+                imageView1.isEnabled = false
+                imageView2.isEnabled = false
+                btn_random.isEnabled = false
             }
 
         })

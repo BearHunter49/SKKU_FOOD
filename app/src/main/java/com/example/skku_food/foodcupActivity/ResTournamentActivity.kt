@@ -93,9 +93,15 @@ class ResTournamentActivity : AppCompatActivity() {
                     1  -> tournament(1)
                 }
                 image_vs.bringToFront()
+                text_res1.isEnabled = true
+                text_res2.isEnabled = true
+                btn_random.isEnabled = true
             }
 
             override fun onAnimationStart(animation: Animation?) {
+                text_res1.isEnabled = false
+                text_res2.isEnabled = false
+                btn_random.isEnabled = false
             }
 
         })

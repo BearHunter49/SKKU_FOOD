@@ -8,7 +8,7 @@ import com.example.skku_food.mainFragment.Fragment3
 
 class ViewpagerAdt(fm: androidx.fragment.app.FragmentManager) : FragmentStatePagerAdapter(fm){
 
-    private val titleList = listOf("메뉴", "추천", "푸드컵")
+    private val titleList = listOf("메뉴", "문의", "푸드컵")
 
     override fun getItem(position: Int): Fragment {
         return when(position){
