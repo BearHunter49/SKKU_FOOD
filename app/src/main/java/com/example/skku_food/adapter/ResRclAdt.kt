@@ -22,11 +22,12 @@ class ResRclAdt(private val items:List<ResSimpleData>, private val menu: String)
             with(holder){
                 nm.text = item.name
                 ph.text = item.phone
-                itemView.btn_res.setOnClickListener{
+                itemView.const_layout.setOnClickListener{
                     with(itemView.context) {
                         val intent = Intent(this, ResMenuActivity::class.java)
                         intent.putExtra("name", item.name)
                         intent.putExtra("menu", menu)
+                        intent.putExtra("phone", item.phone)
                         this.startActivity(intent)
                     }
                 }

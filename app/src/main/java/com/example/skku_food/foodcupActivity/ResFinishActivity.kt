@@ -5,13 +5,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.skku_food.R
 import com.example.skku_food.menuActivity.ResMenuActivity
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_res_finish.*
 
 class ResFinishActivity : AppCompatActivity() {
 
+    lateinit var mAdView: AdView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_res_finish)
+
+        //AdMob
+        MobileAds.initialize(this, getString(R.string.admob_app_id))
+        mAdView = adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         val menu = intent.getStringExtra("menu")
         val resName = intent.getStringExtra("resName")

@@ -66,17 +66,21 @@ class RestaurantActivity : AppCompatActivity() {
     fun dbExecute(menu_name: String?){
         val query = SimpleSQLiteQuery("SELECT name, phone FROM $menu_name")
         val db = DatabaseCopier.getAppDataBase(context = applicationContext)
+        var resList:List<ResSimpleData>? = null
 
         job = CoroutineScope(Dispatchers.IO).launch {
-            val resList = db!!.rawDAO().getJustNamePhone(query)
-            // UI Thread
-            CoroutineScope(Dispatchers.Main).launch {
-                res_recyclerview.apply {
-                    adapter = ResRclAdt(resList, menuNM)
-                    layoutManager = LinearLayoutManager(context)
-                }
+            val tempList = db!!.rawDAO().getJustNamePhone(query)
+            resList = tempList.toList()
+        }
+
+        runBlocking {
+            job?.join()
+            res_recyclerview.apply {
+                adapter = ResRclAdt(resList!!, menuNM)
+                layoutManager = LinearLayoutManager(context)
             }
         }
+
     }
 
 

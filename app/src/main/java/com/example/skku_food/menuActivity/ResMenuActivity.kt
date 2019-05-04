@@ -4,12 +4,17 @@ import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.View
+import androidx.core.text.HtmlCompat
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.skku_food.R
 import com.example.skku_food.data.MenuKorTOEng
 import com.example.skku_food.data.ResFullData
 import com.example.skku_food.database.DatabaseCopier
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_res_menu.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,14 +26,23 @@ class ResMenuActivity : AppCompatActivity() {
     private var mAsTsk: CrawlingAsTsk? = null
     private var job: Job? = null
     private var resInfo: ResFullData? = null
+    lateinit var mAdView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_res_menu)
 
+        //AdMob
+        MobileAds.initialize(this, getString(R.string.admob_app_id))
+        mAdView = adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
         val resNM = intent.getStringExtra("name")
         val menuNM = intent.getStringExtra("menu")
+        val phoneNB = intent.getStringExtra("phone")
         text_resNM.text = resNM
+        text_phone.text = phoneNB
 
 
         when(resNM){
@@ -73,10 +87,14 @@ class ResMenuActivity : AppCompatActivity() {
 
         job = CoroutineScope(Dispatchers.IO).launch {
             resInfo = db!!.rawDAO().getFullResInfo(query)
+            val menuList = resInfo!!.menu.split(",")
+            var resultStr = "<h4><font color='black'>메뉴</font></h4>"
+            for (menu in menuList){
+                resultStr += String.format("%s<br>", menu)
+            }
             // UI Thread
             CoroutineScope(Dispatchers.Main).launch {
-                text_resMenu.text = resInfo?.menu
-                text_phone.text = resInfo?.phone
+                text_resMenu.text = Html.fromHtml(resultStr, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
         }
 

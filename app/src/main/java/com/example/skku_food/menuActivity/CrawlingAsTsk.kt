@@ -4,10 +4,12 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.AsyncTask
+import android.text.Html
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import kotlinx.android.synthetic.main.activity_res_menu.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -63,7 +65,6 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
                         doc.select("div.menu_title").text()
                     // Non-contents
                     if (menuStr == ""){
-                        resultStr += "\n"
                         continue
                     }
                     val priceStr=
@@ -73,15 +74,15 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
                     val priceList = priceStr.split("가격 : ")
 
                     when(fTime){
-                        "B" -> resultStr += "조식\n"
-                        "L" -> resultStr += "중식\n"
-                        "D" -> resultStr += "석식\n"
+                        "B" -> resultStr += "<h4><font color='black'>조식</font></h4>"
+                        "L" -> resultStr += "<h4><font color='black'>중식</font></h4>"
+                        "D" -> resultStr += "<h4><font color='black'>석식</font></h4>"
                     }
 
                     menuList.forEachIndexed { index, s ->
                         resultStr += String.format("%s=%s ", s, priceList[index + 1])
                     }
-                    resultStr += "\n\n"
+
                 }
             }
             // 공식
@@ -96,7 +97,6 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
                         doc.select("div.menu_title").text()
                     // Non-contents
                     if (menuStr == ""){
-                        resultStr += "\n\n"
                         continue
                     }
                     val priceStr=
@@ -105,21 +105,20 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
                     val priceList = priceStr.split("가격 : ")
 
                     when(fTime){
-                        "B" -> resultStr += "조식\n"
-                        "L" -> resultStr += "중식\n"
-                        "D" -> resultStr += "석식\n"
+                        "B" -> resultStr += "<h4><font color='black'>조식</font></h4>"
+                        "L" -> resultStr += "<h4><font color='black'>중식</font></h4>"
+                        "D" -> resultStr += "<h4><font color='black'>석식</font></h4>"
                     }
 
                     menuStr.split(" ").forEachIndexed { index, s ->
                         resultStr += String.format("%s=%s ", s, priceList[index + 1])
                     }
-                    resultStr += "\n\n"
+
                 }
             }
             // 긱식
             "기숙사식당(봉룡학사)" -> {
 
-                Thread.sleep(2000)
                 hakURL = "https://dorm.skku.edu/_custom/skku/_common/board/schedule_menu/food_menu_page.jsp?date=$time&board_no=61&lng=ko"
                 doc = Jsoup.connect(hakURL).get()
 
@@ -128,17 +127,20 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
                     val titleStr = doc.select("#foodlist0$i > ul > li > span").text()
                     val menuList = menuStr.split("[0-9]{2}:[0-9]{2}~[0-9]{2}:[0-9]{2},".toRegex())
 
+                    if (menuStr == ""){
+                        continue
+                    }
+
                     when(i){
-                        1 -> resultStr += "조식\n"
-                        2 -> resultStr += "중식\n"
-                        3 -> resultStr += "석식\n"
+                        1 -> resultStr += "<h4><font color='black'>조식</font></h4>"
+                        2 -> resultStr += "<h4><font color='black'>중식</font></h4>"
+                        3 -> resultStr += "<h4><font color='black'>석식</font></h4>"
                     }
 
                     titleStr.split(" ").forEachIndexed { index, s ->
-                        resultStr += String.format("<%s>\n%s\n", s, menuList[index + 1].trim())
+                        resultStr += String.format("<b>- %s</b><br>%s<br>", s, menuList[index + 1].trim())
                     }
 
-                    resultStr += "\n"
                 }
 
             }
@@ -149,7 +151,7 @@ class CrawlingAsTsk(menuView:TextView, context:Context, activity: Activity):Asyn
     // UI 변경 (결과)
     override fun onPostExecute(result: Unit?) {
         val txtView = weakView.get()
-        txtView?.text = resultStr
+        txtView?.text = Html.fromHtml(resultStr, HtmlCompat.FROM_HTML_MODE_LEGACY)
         dialog.dismiss()
     }
 

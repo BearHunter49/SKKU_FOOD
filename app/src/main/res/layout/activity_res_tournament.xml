@@ -60,8 +60,10 @@
                android:id="@+id/image_vs"/>
 
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="아몰랑"
+            android:text="랜덤"
             app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="#3E5F22"
+            android:background="@drawable/location_button"
             android:id="@+id/btn_random"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/text_res2"/>

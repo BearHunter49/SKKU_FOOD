@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="@dimen/item_offset"
-              android:layout_height="100dp"
+              android:layout_height="80dp"
 >
 
     <ImageView android:layout_width="match_parent"
-               android:layout_height="80dp"
+               android:layout_height="60dp"
                android:id="@+id/menu_image"
 
    />
