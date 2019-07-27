@@ -58,7 +58,7 @@
                 android:value="@string/admob_app_id"/>
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
-                android:value="e60e226d50916f5e628fd6f749b46a98"/>
+                android:value="key"/>
     </application>
 
 </manifest>
