@@ -32,7 +32,7 @@ Android Application that can find restaurants nearby SKKU (In Suwon)
 - You can see just list of restaurants nearby SKKU
 <br>
 
-### Tournament
+### Tournament (FoodCup)
 - You can choose food and restaurant by tournament method
 <br>
 
