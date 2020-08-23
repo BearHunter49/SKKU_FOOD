@@ -36,5 +36,11 @@ Android Application that can find restaurants nearby SKKU (In Suwon)
 - You can choose food and restaurant by tournament method
 <br>
 
+## App Examples
+<img src='img/main_menu.jpeg' width='250' height='400'>
+<img src='img/schoolfood.jpeg' width='250' height='400'>
+<img src='img/tournament.jpeg' width='250' height='400'>
+<img src='img/tour_result.jpeg' width='250' height='400'>
+
 ## ISSUE
 
