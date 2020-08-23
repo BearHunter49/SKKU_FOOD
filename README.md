@@ -10,6 +10,14 @@ Practice for Android Application
 - SQLite (Local Database)
 - Only Portrait Screen
 
+## Libraries
+- Room 2.1.0
+- jsoup 1.11.3
+- Admob (Google 광고)
+- Picasso 2.7
+- KakaoMap
+- Androidx (Jetpack)
+
 ## Description
 Android Application that can find restaurants nearby SKKU (In Suwon)
 <br>
@@ -17,6 +25,7 @@ Android Application that can find restaurants nearby SKKU (In Suwon)
 ## Functions
 ### Foods
 - You can choose category of foods (Total 15)
+- You can also check menu of school cafeteria (By Crawling)
 <br>
 
 ### Restaurants
