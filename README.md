@@ -5,7 +5,7 @@ Practice for Android Application
 
 ## Environments
 - Kotlin (Language)
-- Android 3.0 (IDE)
+- Android Studio 3.0 (IDE)
 - API 28
 - SQLite (Local Database)
 - Only Portrait Screen
