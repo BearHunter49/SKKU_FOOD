@@ -1,4 +1,4 @@
-# SKKU_FOOD
+# 율전밥상
 Practice for Android Application
 <br>
 <br>
