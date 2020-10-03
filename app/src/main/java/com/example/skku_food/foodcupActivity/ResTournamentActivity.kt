@@ -36,7 +36,7 @@ class ResTournamentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_res_tournament)
 
         dialog = ProgressDialog(this)
-        menu = intent.getStringExtra("menu")
+        menu = intent.getStringExtra("menu").toString()
         val menuEngName = MenuKorTOEng.mHash[menu]
 
         // 다이얼로그 띄우기

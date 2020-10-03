@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.skku_food.R
 import com.example.skku_food.data.MenuFoodCupData
 import com.example.skku_food.data.MenuFoodCupURL
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_tournament.*
 import kotlinx.coroutines.*
 import kotlin.random.Random
@@ -33,8 +34,8 @@ class MenuTournamentActivity : AppCompatActivity() {
         //ViewModel Observer 달아주기
         model = ViewModelProviders.of(this).get(MenuViewModel::class.java)
         val menuObserver = Observer<List<MenuFoodCupData>>{ newList ->
-            imageView1.setImageResource(newList[0].url)
-            imageView2.setImageResource(newList[1].url)
+            Picasso.get().load(newList[0].url).into(imageView1)
+            Picasso.get().load(newList[1].url).into(imageView2)
             text_menu1.text = newList[0].name
             text_menu2.text = newList[1].name
         }

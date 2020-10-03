@@ -55,10 +55,10 @@ class MapActivity : AppCompatActivity(), MapView.CurrentLocationEventListener {
                     fab_btn.supportBackgroundTintList = getColorStateList(R.color.fab_clicked)
                     map_view.apply {
                         // Custom Marker
-                        setCustomCurrentLocationMarkerTrackingImage(R.drawable.ic_custom_arrow, MapPOIItem
-                            .ImageOffset(28, 28))
-                        setCustomCurrentLocationMarkerDirectionImage(R.drawable.ic_custom_direction, MapPOIItem
-                            .ImageOffset(65, 65))
+//                        setCustomCurrentLocationMarkerTrackingImage(R.drawable.ic_custom_arrow, MapPOIItem
+//                        .ImageOffset(28, 28))
+//                        setCustomCurrentLocationMarkerDirectionImage(R.drawable.ic_custom_direction, MapPOIItem
+//                            .ImageOffset(65, 65))
 
                         currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
                         setZoomLevelFloat(0.5f, true)
