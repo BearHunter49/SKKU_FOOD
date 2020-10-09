@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.View
 import androidx.core.text.HtmlCompat
 import androidx.sqlite.db.SimpleSQLiteQuery
@@ -63,9 +64,9 @@ class ResMenuActivity : AppCompatActivity() {
         // Button
         btn_location.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
-            intent.putExtra("latitude", resInfo?.latitude)
-            intent.putExtra("longitude", resInfo?.longitude)
-            intent.putExtra("name", resInfo?.name)
+            intent.putExtra("latitude", resInfo!!.latitude)
+            intent.putExtra("longitude", resInfo!!.longitude)
+            intent.putExtra("name", resInfo!!.name)
             startActivity(intent)
         }
 
@@ -87,6 +88,9 @@ class ResMenuActivity : AppCompatActivity() {
 
         job = CoroutineScope(Dispatchers.IO).launch {
             resInfo = db!!.rawDAO().getFullResInfo(query)
+            Log.d("GPS", resInfo!!.latitude)
+            Log.d("GPS", resInfo!!.longitude)
+
             val menuList = resInfo!!.menu.split(",")
             var resultStr = "<h4><font color='black'>메뉴</font></h4>"
             for (menu in menuList){

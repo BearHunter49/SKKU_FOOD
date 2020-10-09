@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
@@ -38,6 +39,8 @@ class ResTournamentActivity : AppCompatActivity() {
         dialog = ProgressDialog(this)
         menu = intent.getStringExtra("menu").toString()
         val menuEngName = MenuKorTOEng.mHash[menu]
+        Log.d("Menu", menu)
+        Log.d("Menu Eng", menuEngName)
 
         // 다이얼로그 띄우기
         dialog.apply {
@@ -74,6 +77,15 @@ class ResTournamentActivity : AppCompatActivity() {
 
         // Initial state
         totalCount = startList.size / 2
+
+        // 식당 2개 미만인 경우
+        if(startList.size < 2){
+            model.currentRes.value = listOf(startList[0], startList[0])
+            startList.removeAt(0)
+            tournament(0)
+        }
+
+
         val firstItem = startList.random()
         startList.remove(firstItem)
         val secondItem = startList.random()

@@ -23,10 +23,10 @@ class MenuFinishActivity : AppCompatActivity() {
         mAdView.loadAd(adRequest)
 
         val menu = intent.getStringExtra("menu")
-        val url = intent.getIntExtra("url", 0)
+        val img = intent.getIntExtra("img", 0)
 
         text_menuName.text = String.format("당신의 선택은 '$menu'입니다! ")
-        imageView.setImageResource(url)
+        imageView.setImageResource(img)
 
         btn_goResCup.setOnClickListener {
             val intent = Intent(this, ResTournamentActivity::class.java)

@@ -3,6 +3,7 @@ package com.example.skku_food.menuActivity
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.skku_food.R
 import com.example.skku_food.myMethod.MyPermission
@@ -23,6 +24,9 @@ class MapActivity : AppCompatActivity(), MapView.CurrentLocationEventListener {
         val latitude = intent.getStringExtra("latitude")
         val longitude = intent.getStringExtra("longitude")
 
+        Log.d("GPS map", latitude)
+        Log.d("GPS map", longitude)
+
         // Map 초기 설정
         val marker = MapPOIItem()
         marker.apply {
@@ -32,10 +36,10 @@ class MapActivity : AppCompatActivity(), MapView.CurrentLocationEventListener {
             markerType = MapPOIItem.MarkerType.RedPin
             isShowDisclosureButtonOnCalloutBalloon = false
         }
+
         map_view.apply {
             mapType = MapView.MapType.Standard
-            setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude.toDouble(), longitude.toDouble()), true)
-            setZoomLevelFloat(0.5f, true)
+            setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude.toDouble(), longitude.toDouble()), 1, true)
             addPOIItem(marker)
             setCurrentLocationEventListener(this@MapActivity)
         }

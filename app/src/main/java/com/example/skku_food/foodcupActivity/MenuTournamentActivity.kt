@@ -3,7 +3,6 @@ package com.example.skku_food.foodcupActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
@@ -11,16 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.skku_food.R
 import com.example.skku_food.data.MenuFoodCupData
-import com.example.skku_food.data.MenuFoodCupURL
+import com.example.skku_food.data.MenuFoodCupImage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_tournament.*
-import kotlinx.coroutines.*
 import kotlin.random.Random
 
 class MenuTournamentActivity : AppCompatActivity() {
 
     private lateinit var model: MenuViewModel
-    private var startList = MenuFoodCupURL.menuInfo.toMutableList()
+    private var startList = MenuFoodCupImage.menuInfo.toMutableList()
     private var endList:MutableList<MenuFoodCupData> = mutableListOf()
     private var totalCount = startList.size / 2
     private var count = 1
@@ -34,8 +32,8 @@ class MenuTournamentActivity : AppCompatActivity() {
         //ViewModel Observer 달아주기
         model = ViewModelProviders.of(this).get(MenuViewModel::class.java)
         val menuObserver = Observer<List<MenuFoodCupData>>{ newList ->
-            Picasso.get().load(newList[0].url).into(imageView1)
-            Picasso.get().load(newList[1].url).into(imageView2)
+            Picasso.get().load(newList[0].img).into(imageView1)
+            Picasso.get().load(newList[1].img).into(imageView2)
             text_menu1.text = newList[0].name
             text_menu2.text = newList[1].name
         }
@@ -102,8 +100,6 @@ class MenuTournamentActivity : AppCompatActivity() {
                 }
             }
         }
-
-
     }
 
 
@@ -132,7 +128,7 @@ class MenuTournamentActivity : AppCompatActivity() {
             else{
                 val intent = Intent(this, MenuFinishActivity::class.java)
                 intent.putExtra("menu", endList[0].name)
-                intent.putExtra("url", endList[0].url)
+                intent.putExtra("img", endList[0].img)
                 startActivity(intent)
                 finish()
             }
