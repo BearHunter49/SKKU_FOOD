@@ -1,7 +1,8 @@
 # 율전밥상
 Practice for Android Application
 <br>
-Notion: [Link](https://www.notion.so/bearhunter49/9e4ad4290dd145e093d1809a2d8f0dbb)
+## Notion
+[Link](https://www.notion.so/bearhunter49/9e4ad4290dd145e093d1809a2d8f0dbb)
 <br>
 <br>
 
